@@ -16,8 +16,7 @@ WITH session_data AS (
     AND hostname = 'www.laithwaites.com'
     AND country != 'India'
   GROUP BY ALL
-),
-transaction_data AS (
+)
   SELECT
     sd.date,
     sd.session_id,
@@ -34,6 +33,3 @@ transaction_data AS (
     AND REGEXP_CONTAINS(sd.landing_page, r'.*\/wine-blog.*|.*\/product.*|.*\/wines.*')
     AND NOT REGEXP_CONTAINS(sd.landing_page, r'promoCode=')
   GROUP BY ALL
-)
-SELECT date, transaction_id, revenue, source_medium, landing_page
-FROM transaction_data;
